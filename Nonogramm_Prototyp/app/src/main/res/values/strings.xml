@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nonogramm</string>
+    <string name="status_fill">FILL</string>
+    <string name="win">YOU WIN</string>
+    <string name="modus1">MÜNZMODUS</string>
+    <string name="modus2">STORYMODUS</string>
+    <string name="modus3">FARBMODUS</string>
+    <string name="einstellungen">Einstellungen</string>
+    <string name="shop">Shop</string>
+</resources>
