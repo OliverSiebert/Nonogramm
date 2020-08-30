@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.menu_layout.*
 class Menu: AppCompatActivity() {
     private val datenbank = DatenbankKlasse(this)
     private val shopDB = ShopDatenbank(this)
+    private val storyDb = StoryDatenbank(this)
     private lateinit var zeitmodus_button: Button
     private lateinit var farbmodus_button: Button
     private lateinit var storymodus_button: Button
@@ -209,6 +210,8 @@ class Menu: AppCompatActivity() {
         else{
             geld.text = "Daten"
         }
+        shopDB.initDatabase()
+        storyDb.initDatabase()
 
 
 

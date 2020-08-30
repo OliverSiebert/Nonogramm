@@ -7,10 +7,11 @@
     android:layout_height="match_parent">
 
     <TableLayout
-        android:layout_width="409dp"
+        android:layout_width="360dp"
         android:layout_height="540dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="60dp">
 
         <TableRow
@@ -40,10 +41,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
                 android:fontFamily="monospace"
+                android:foreground="@drawable/border"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@android:color/darker_gray"
-                android:foreground="@drawable/border"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>
@@ -61,10 +62,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
                 android:fontFamily="monospace"
+                android:foreground="@drawable/border"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@android:color/darker_gray"
-                android:foreground="@drawable/border"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>
@@ -82,10 +83,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
                 android:fontFamily="monospace"
+                android:foreground="@drawable/border"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@android:color/darker_gray"
-                android:foreground="@drawable/border"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>

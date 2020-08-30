@@ -14,7 +14,7 @@ import kotlin.random.Random
 class Zeit3x3 : AppCompatActivity() {
     private val datenbank = DatenbankKlasse(this)
     private val shopDB = ShopDatenbank(this)
-    private var currentSymbol = "FILL"
+    private var currentSymbol = "F"
     private var solutionText = arrayOf("", "", "", "", "", "", "", "", "")
     private var solutionInt = arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0)
     private var sumArray = arrayOf(0, 0, 0, 0, 0, 0)
@@ -56,7 +56,7 @@ class Zeit3x3 : AppCompatActivity() {
             }
             else{
                 symbolChanger.text = "FILL"
-                currentSymbol = "FILL"
+                currentSymbol = "F"
             }
         }
 
@@ -83,7 +83,7 @@ class Zeit3x3 : AppCompatActivity() {
     // Fuellen der Felder durch Klicken
     @SuppressLint("ResourceType")
     private fun onFieldClick(field: TextView){
-        if ((field.text == "FILL") || (field.text == "X")){
+        if ((field.text == "F") || (field.text == "X")){
             field.setTextColor(Color.parseColor("#FFFFFF"))
             field.text = ""
             field.setBackgroundColor(Color.WHITE)
@@ -92,7 +92,7 @@ class Zeit3x3 : AppCompatActivity() {
             field.setTextColor(Color.parseColor("#F44336"))
             field.text = currentSymbol
         }
-        else if(currentSymbol == "FILL"){
+        else if(currentSymbol == "F"){
             field.setBackgroundColor(Color.GRAY)
             field.setTextColor(Color.GRAY)
             field.text = currentSymbol
@@ -107,7 +107,6 @@ class Zeit3x3 : AppCompatActivity() {
             Toast.makeText(this@Zeit3x3, getString(R.string.win), Toast.LENGTH_SHORT).show()
             aendern()
             gameState="won"
-            //saveLevel()
             resetGame()
             generateNewGame()
         }
@@ -171,7 +170,7 @@ class Zeit3x3 : AppCompatActivity() {
         var i=0
         while(i<9){
             solutionInt[i] = Random.nextInt(2)
-            solutionText[i] = if(solutionInt[i] == 1 ) "FILL" else ""
+            solutionText[i] = if(solutionInt[i] == 1 ) "F" else ""
             i += 1
         }
         //Beschriftung der Achsen
@@ -212,13 +211,13 @@ class Zeit3x3 : AppCompatActivity() {
     //Auf Vollstaendigkeit pruefen
     private fun pruefe(fa: TextView, fb: TextView, fc: TextView, current: Int, fabc: TextView): Boolean{
         var tmp = 0
-        if(fa.text=="FILL"){
+        if(fa.text=="F"){
             tmp += 1
         }
-        if(fb.text=="FILL"){
+        if(fb.text=="F"){
             tmp += 1
         }
-        if(fc.text=="FILL"){
+        if(fc.text=="F"){
             tmp += 1
         }
         //weitere if Bediengung um 1,1 und 2 zu unterscheiden, ist noch nicht vorhanden
@@ -229,7 +228,7 @@ class Zeit3x3 : AppCompatActivity() {
             else if((fa.text == fc.text) && (fabc.text == "1 1")){
                 return true
             }
-            else if((fa.text != fc.text) &&(fb.text == "FILL") && (fabc.text == "2")) {
+            else if((fa.text != fc.text) &&(fb.text == "F") && (fabc.text == "2")) {
                 return true
             }
             return false
@@ -237,15 +236,6 @@ class Zeit3x3 : AppCompatActivity() {
         return sumArray[current] == tmp
     }
 
-    //Level sichern
-    private fun saveLevel(){
-        val pref = getPreferences(Context.MODE_PRIVATE)
-        val editor = pref.edit()
-        var a = level.text.toString().toInt() + 1
-        level.text = a.toString()
-        editor.putInt("LEVEL", a)
-        editor.commit()
-    }
     private fun lesen(): Int {
         val leser = datenbank.readableDatabase
         var daten = ""

@@ -14,7 +14,7 @@ import androidx.core.view.OneShotPreDrawListener.add
 import kotlin.random.Random
 
 class Zeit5x5: AppCompatActivity() {
-    private var currentSymbol = "FILL"
+    private var currentSymbol = "F"
     private var solution= arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
     private val datenbank = DatenbankKlasse(this)
     private var geldValue = 0
@@ -59,7 +59,7 @@ class Zeit5x5: AppCompatActivity() {
             }
             else{
                 symbolChanger.text = "FILL"
-                currentSymbol = "FILL"
+                currentSymbol = "F"
             }
         }
         //Reset Button
@@ -128,7 +128,7 @@ else{summe.text = ausgabe.joinToString(" ")}
 }
 
 private fun onFieldClick(field: TextView) {
-if ((field.text == "FILL") || (field.text == "X")){
+if ((field.text == "F") || (field.text == "X")){
     field.setTextColor(Color.parseColor("#FFFFFF"))
     field.text = ""
     field.setBackgroundColor(Color.WHITE)
@@ -137,7 +137,7 @@ else if(currentSymbol == "X"){
     field.text = currentSymbol
     field.setTextColor(Color.parseColor("#F44336"))
 }
-else if(currentSymbol == "FILL"){
+else if(currentSymbol == "F"){
     field.setBackgroundColor(Color.GRAY)
     field.setTextColor(Color.GRAY)
     field.text = currentSymbol
@@ -172,7 +172,7 @@ var tmptext: String
 var counter = 0
 var ausgabe = arrayOf(0)
 for(zahl in text){
-    if(zahl != "FILL"){
+    if(zahl != "F"){
         if(counter != 0){
             ausgabe = ausgabe.plus(counter)
             counter = 0

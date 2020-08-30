@@ -22,14 +22,6 @@ class EinstellungenAuswahl: AppCompatActivity() {
     private lateinit var dbString:String
     var daten = ""
     var seiteZahl = 1
-    /*override fun onRestart() {
-        super.onRestart()
-        doBindService()
-        val music = Intent()
-        music.setClass(this@EinstellungenAuswahl, MusicService::class.java)
-        //startService(music)
-        loadValues()
-    }*/
 
     //Musik
     private var mIsBound = false

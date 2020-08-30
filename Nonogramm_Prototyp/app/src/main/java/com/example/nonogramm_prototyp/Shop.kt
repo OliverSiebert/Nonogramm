@@ -28,9 +28,6 @@ class Shop: AppCompatActivity() {
         setContentView(R.layout.shop)
         geld = lesen()
         generateItems()
-        //shopItem1.text = shopItems[0].toString()
-        //shopItem2.text = shopItems[1].toString()
-        //shopItem3.text = shopItems[2].toString()
         loadValues()
         var allFields = arrayOf(shopItem1, shopItem2, shopItem3)
         for(field in allFields){
@@ -52,7 +49,6 @@ class Shop: AppCompatActivity() {
         var fontColor = ergebnis.getString(ergebnis.getColumnIndex("font"))
         var backgroundColor = ergebnis.getString(ergebnis.getColumnIndex("background"))
         leser.close()
-        //ganzeSeite.setTextColor(Color.parseColor(fontColor.toString()))
         ganzeSeite.setBackgroundColor(Color.parseColor(backgroundColor))
         ersteRow.setBackgroundColor(Color.parseColor(backgroundColor))
     }

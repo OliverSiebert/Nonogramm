@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.story5x5.*
 
 class Story5x5: AppCompatActivity(){
-    private var currentSymbol = "FILL"
+    private var currentSymbol = "F"
     private var solution= arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
     private val datenbank = DatenbankKlasse(this)
     private val storyDB = StoryDatenbank(this)
@@ -42,7 +42,6 @@ class Story5x5: AppCompatActivity(){
         var fontColor = ergebnis.getString(ergebnis.getColumnIndex("font"))
         var backgroundColor = ergebnis.getString(ergebnis.getColumnIndex("background"))
         leser.close()
-        //ganzeSeite.setTextColor(Color.parseColor(fontColor.toString()))
         ganzeSeite.setBackgroundColor(Color.parseColor(backgroundColor))
 
         // Fill und X Wechsel
@@ -54,19 +53,13 @@ class Story5x5: AppCompatActivity(){
             }
             else{
                 symbolChanger.text = "FILL"
-                currentSymbol = "FILL"
+                currentSymbol = "F"
             }
         }
         //Reset Button
         reset.setOnClickListener(){
             resetGame()
         }
-
-        //New Game Button
-        /*newGame.setOnClickListener(){
-            resetGame()
-            //generateNewGame()
-        }*/
     }
 
     private fun farbeAendern(field: TextView) {
@@ -95,7 +88,7 @@ class Story5x5: AppCompatActivity(){
         beschrifte(f5 as TextView, 20, 21, 22, 23, 24, false)
     }
 
-    private fun beschrifte(summe: TextView, zahl1: Int, zahl2: Int, zahl3: Int, zahl4: Int, zahl5: Int, hoch: Boolean) { //: Array<Int>
+    private fun beschrifte(summe: TextView, zahl1: Int, zahl2: Int, zahl3: Int, zahl4: Int, zahl5: Int, hoch: Boolean) {
         var zahlen = arrayOf(solution[zahl1], solution[zahl2], solution[zahl3], solution[zahl4], solution[zahl5], 0)
         var counter = 0
         var ausgabe = arrayOf(0)
@@ -118,7 +111,7 @@ class Story5x5: AppCompatActivity(){
     private fun readDB() {
         val leser = storyDB.readableDatabase
         val ergebnis = leser.rawQuery(
-            "SELECT * FROM story WHERE selected = true", null)
+            "SELECT * FROM story WHERE selected = 1", null)
         ergebnis.moveToNext()
         solution[0] = ergebnis.getInt(ergebnis.getColumnIndex("A1"))
         solution[1] = ergebnis.getInt(ergebnis.getColumnIndex("B1"))
@@ -167,7 +160,7 @@ class Story5x5: AppCompatActivity(){
     }
 
     private fun onFieldClick(field: TextView) {
-        if ((field.text == "FILL") || (field.text == "X")){
+        if ((field.text == "F") || (field.text == "X")){
             field.setTextColor(Color.parseColor("#FFFFFF"))
             field.text = ""
             field.setBackgroundColor(Color.WHITE)
@@ -176,14 +169,13 @@ class Story5x5: AppCompatActivity(){
             field.text = currentSymbol
             field.setTextColor(Color.parseColor("#F44336"))
         }
-        else if(currentSymbol == "FILL"){
+        else if(currentSymbol == "F"){
             field.setBackgroundColor(Color.GRAY)
             field.setTextColor(Color.GRAY)
             field.text = currentSymbol
         }
         if(checkWin()){
             Toast.makeText(this@Story5x5, getString(R.string.win), Toast.LENGTH_SHORT).show()
-            //resetGame()
             var where = "name='"+ statusText.text + "'"
             storyDBaendern("solved", true, where )
             aendern()
@@ -211,7 +203,6 @@ class Story5x5: AppCompatActivity(){
 
     }
 
-    // Funktioniert nicht
     private fun checkWin(): Boolean {
         if(pruefe(f1 as TextView, fA1 as TextView, fB1 as TextView, fC1 as TextView, fD1 as TextView, fE1 as TextView, false)){f1.setBackgroundColor(Color.GREEN)}else{f1.setBackgroundColor(Color.parseColor("#00ddff"))}
         if(pruefe(f2 as TextView, fA2 as TextView, fB2 as TextView, fC2 as TextView, fD2 as TextView, fE2 as TextView, false)){f2.setBackgroundColor(Color.GREEN)}else{f2.setBackgroundColor(Color.parseColor("#00ddff"))}
@@ -231,20 +222,20 @@ class Story5x5: AppCompatActivity(){
             if(((solution[counter] == 1)&&((field.text == "")||(field.text == "X")))){
                 return false
             }
-            if(((solution[counter] == 0) && (field.text == "FILL"))){
+            if(((solution[counter] == 0) && (field.text == "F"))){
                return false
             }
             counter += 1
         }
         return true
     }
-    private fun pruefe(summe: TextView, feld1: TextView, feld2: TextView, feld3: TextView, feld4: TextView, feld5: TextView, hoch: Boolean): Boolean { //: Array<Int>
+    private fun pruefe(summe: TextView, feld1: TextView, feld2: TextView, feld3: TextView, feld4: TextView, feld5: TextView, hoch: Boolean): Boolean {
         var text = arrayOf(feld1.text, feld2.text, feld3.text, feld4.text, feld5.text, 0)
         var tmptext: String
         var counter = 0
         var ausgabe = arrayOf(0)
         for(zahl in text){
-            if(zahl != "FILL"){
+            if(zahl != "F"){
                 if(counter != 0){
                     ausgabe = ausgabe.plus(counter)
                     counter = 0
@@ -258,7 +249,6 @@ class Story5x5: AppCompatActivity(){
         if(ausgabe.size != 1){ausgabe = ausgabe.sliceArray(1..max)}
         if(hoch){tmptext = ausgabe.joinToString("\n")}
         else{tmptext = ausgabe.joinToString(" ")}
-//if(tmptext == summe.text){ summe.setBackgroundColor(Color.BLUE)}
         return tmptext == summe.text
     }
 

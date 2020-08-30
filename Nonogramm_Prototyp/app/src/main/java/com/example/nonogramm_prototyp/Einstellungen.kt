@@ -73,8 +73,6 @@ class Einstellungen: AppCompatActivity() {
         doBindService()
         val music = Intent()
         music.setClass(this@Einstellungen, MusicService::class.java)
-        //startService(music)
-        //onDestroy()
 
         val leser = shopDB.readableDatabase
         val ergebnis = leser.rawQuery(
@@ -83,7 +81,6 @@ class Einstellungen: AppCompatActivity() {
         var fontColor = ergebnis.getString(ergebnis.getColumnIndex("font"))
         var backgroundColor = ergebnis.getString(ergebnis.getColumnIndex("background"))
         leser.close()
-        //ganzeSeite.setTextColor(Color.parseColor(fontColor.toString()))
         ganzeSeite.setBackgroundColor(Color.parseColor(backgroundColor))
 
         farb_button.text = "Colors"
